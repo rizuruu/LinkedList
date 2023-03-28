@@ -10,11 +10,6 @@ LinkedLists::~LinkedLists()
 
 ListNode* LinkedLists::MakeNode(ListNode** head, int d)
 {
-    return nullptr;
-}
-
-ListNode* LinkedLists::InsertFirst(ListNode** head, int d)
-{
     ListNode* newNode = new ListNode;
     ListNode* last = *head;
 
@@ -33,8 +28,12 @@ ListNode* LinkedLists::InsertFirst(ListNode** head, int d)
     }
 
     last->next = newNode;
-
     return newNode;
+}
+
+ListNode* LinkedLists::InsertFirst(ListNode** head, int d)
+{
+    return nullptr;
 }
 
 void LinkedLists::InsertAfter(ListNode* lastNode, int d)
@@ -61,4 +60,14 @@ ListNode* LinkedLists::Find(ListNode* node, int val)
 
 void LinkedLists::PrintList(ListNode* node)
 {
+    while (node != nullptr)
+    {
+        std::cout << std::setw(5) << "| " << node->data << " |-->";
+        node = node->next;
+    }
+
+    if (node == nullptr)
+    {
+        std::cout << "| NULL |" << std::endl;
+    }
 }
