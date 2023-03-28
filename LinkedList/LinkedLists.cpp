@@ -33,23 +33,65 @@ ListNode* LinkedLists::MakeNode(ListNode** head, int d)
 
 ListNode* LinkedLists::InsertFirst(ListNode** head, int d)
 {
-    return nullptr;
+    ListNode* newNode = new ListNode; //create a node
+
+    newNode->data = d; //assign data
+    newNode->next = *head; //set next of newNode as head
+    *head = newNode; //move the head to point to newNode at the front
+
+    return newNode;
 }
 
 void LinkedLists::InsertAfter(ListNode* lastNode, int d)
 {
+    ListNode* newNode = new ListNode;
+    newNode->data = d;
+    newNode->next = lastNode->next;
+    lastNode->next = newNode;
 }
 
 void LinkedLists::DeleteList(ListNode** node)
 {
+    ListNode* pTemp = *node;
+    ListNode* next;
+
+    while (pTemp != nullptr)
+    {
+        next = pTemp->next;
+        delete pTemp;
+        pTemp = next;
+    }
+    *node = nullptr;
 }
 
 void LinkedLists::DeleteAfter(ListNode* node)
 {
+    ListNode* pTemp;
+    if (node != nullptr && node->next != nullptr)
+    {
+        pTemp = node->next;
+        node->next = pTemp->next;
+
+        delete pTemp;
+    }
 }
 
 ListNode* LinkedLists::GetNode(ListNode* node, int pos)
 {
+    int count = 0;
+
+    while (node != nullptr)
+    {
+        if (count == pos)
+        {
+            std::cout << "Data stored at position " << pos << " is: " << node->data << std::endl;
+            return node;
+        }
+        count++;
+        node = node->next;
+    }
+
+    std::cout << pos << " was not a vaild position..." << std::endl;
     return nullptr;
 }
 
